@@ -75,47 +75,72 @@ Here's a brief overview of how to use the Hospital Management System:
 
 
 ## Screenshots
-Login
-![Screenshot 1](screenshots/login.png)
+Index
+![Screenshot 1](screenshots/dash.JPG)
 
-SignUp 
-![Screenshot 1](screenshots/signup.png)
+New Registration 
+![Screenshot 1](screenshots/register.JPG)
 
-Dashboard
-![Screenshot 1](screenshots/dashboard.png)
+Admin Log In
+![Screenshot 1](screenshots/adminlog.JPG)
 
-Patient
-![Screenshot 2](screenshots/patient.png)
+**User**
 
-Searching Patient
-![Screenshot 4](screenshots/search.png)
-Prescription
-![Screenshot 3](screenshots/prescription.png)
+User Dashboard
+![Screenshot 2](screenshots/userhome.JPG)
 
-Reports
+Update Details 
+![Screenshot 4](screenshots/up_user_detail.JPG)
 
-Prescription Report
-![Screenshot 4](screenshots/new_reports.png)
+Subscription 
+![Screenshot 3](screenshots/see_pack_user.JPG)
 
-Test Report
-![Screenshot 4](screenshots/test_report.png)
+Gold Pack Details
+![Screenshot 4](screenshots/Gold_paack.JPG)
 
-Medical Report
-![Screenshot 4](screenshots/medical_report.png)
+Premium Pack Details
+![Screenshot 4](screenshots/Premius_pack.JPG)
 
-Email
+Pay
+![Screenshot 4](screenshots/user_pay.JPG)
 
-Using Custom Email
-![Screenshot 4](screenshots/email_custom.png)
+Generate Invoice
+![Screenshot 4](screenshots/user_invoice.JPG)
 
-Using Patient Details
-![Screenshot 4](screenshots/email_patient.png)
+About Us
+![Screenshot 4](screenshots/about.JPG)
 
-Add Email Template
-![Screenshot 4](screenshots/add_email.png)
+**Admin**
 
-Update Email Credentials
-![Screenshot 4](screenshots/update_email_codes.png)
+Admin Dashboard
+![Screenshot 4](screenshots/admin_home.JPG)
+
+See Worker
+![Screenshot 4](screenshots/see_worker.JPG)
+
+See Customer
+![Screenshot 4](screenshots/admin_see_user.JPG)
+
+Update Customer
+![Screenshot 4](screenshots/admin_see_user_up.JPG)
+
+Add Plans
+![Screenshot 4](screenshots/admin_up_plan.JPG)
+
+Add Plan Interface
+![Screenshot 4](screenshots/admin_add_gold.JPG)
+
+Update Subscription
+![Screenshot 4](screenshots/admin_up_subsc.JPG)
+
+Update Subscription Interface
+![Screenshot 4](screenshots/admin_Se_gol_up.JPG)
+
+Manage Invoice
+![Screenshot 4](screenshots/manage_invoice.JPG)
+
+Generate Invoice
+![Screenshot 4](screenshots/admin_generate_inv.JPG)
 
 
 ## Acknowledgments
@@ -128,4 +153,4 @@ If you have any questions or need assistance, please feel free to contact us:
 - email: omgawali2003@gmail
 - Project Link: [click here]([https://github.com/OMRG-01/Cable-Management-System.git])
 
-We hope this Hospital Management System is helpful for managing hospital operations efficiently.
+We hope this Cable Management System is helpful for managing Cable operations efficiently.
