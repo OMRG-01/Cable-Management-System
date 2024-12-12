@@ -1,0 +1,208 @@
+/* General Styles */
+body {
+    background-image: url('../image/home2.jpg'); /* Make sure the path is correct */
+    background-size: cover;  /* Ensures the image covers the entire screen */
+    background-position: center center;  /* Centers the image */
+    background-attachment: fixed;  /* Keeps the image fixed while scrolling */
+    background-repeat: no-repeat;  /* Prevents image repetition */
+    min-height: 100vh;  /* Ensures the body takes at least the full viewport height */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ 
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title h1 {
+    font-size: 24px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input_field {
+    display: flex;
+    flex-direction: column;
+}
+
+.input_field label {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+}
+
+.input_field .input,
+.selectbox {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.input_field .input:focus,
+.selectbox:focus {
+    outline: none;
+    border-color: #48CAE4;
+    box-shadow: 0 0 5px rgba(72, 202, 228, 0.5);
+}
+
+.selectbox {
+    appearance: none;
+    background: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="#333" d="M2 0L0 2h4z"/></svg>') no-repeat right 10px center;
+    background-size: 12px;
+    background-color: #ffffff;
+}
+
+.btn {
+    background-color: #48CAE4;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0077b6;
+}
+
+.flex {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.flex .button {
+    background-color: #90E0EF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.flex .button:hover {
+    background-color: #0077b6;
+}
+
+/* Media Query for Mobile Responsiveness */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .title h1 {
+        font-size: 20px;
+    }
+}
+.header {
+    width: 100%;
+    background-color: #333; /* Dark background for the header */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header .navbar {
+    display: flex;
+    justify-content: flex-end; /* Align navigation items to the right */
+    padding-right: 20px; /* Add spacing on the right */
+    font-size: 18px; /* Adjust the font size */
+}
+
+.header .navbar ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Center-align navigation items vertically */
+}
+
+.header .navbar li {
+    margin: 0 15px; /* Add spacing between items */
+}
+
+.header .navbar a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text color */
+    padding: 8px 16px; /* Add padding for clickable area */
+    background-color: #0066FF; /* Button-like background color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: bold;
+}
+
+.header .navbar a:hover {
+    background-color: #0056e3; /* Slightly darker blue on hover */
+}
+
+.header .navbar a:active {
+    background-color: #0046c4; /* Even darker blue when active */
+}
+.header {
+    width: 100%;
+    background-color: #333; /* Dark background for the header */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header .navbar {
+    display: flex;
+    justify-content: flex-end; /* Align navigation items to the right */
+    padding-right: 20px; /* Add spacing on the right */
+    font-size: 18px; /* Adjust the font size */
+}
+
+.header .navbar ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Center-align navigation items vertically */
+}
+
+.header .navbar li {
+    margin: 0 15px; /* Add spacing between items */
+}
+
+.header .navbar a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text color */
+    padding: 8px 16px; /* Add padding for clickable area */
+    background-color: #0066FF; /* Button-like background color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: 100;
+}
+
+.header .navbar a:hover {
+    background-color: #0056e3; /* Slightly darker blue on hover */
+}
+
+.header .navbar a:active {
+    background-color: #0046c4; /* Even darker blue when active */
+}

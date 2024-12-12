@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Menu Bar</title>
+    <link rel="stylesheet" href="css/style8.css">
+</head>
+<body>
+    <div class="header">
+        <div class="navbar">
+            <ul>
+                <li><a href="logout1.php">Logout</a></li>
+                <li><a id="currentTime">Time:</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="../image/admin.png">
+            <h4>Admin Page</h4>
+        </div>
+        <ul class="menu">
+            <li><a href="displaycustomer.php">Customer Details</a></li>
+            <li><a href="updatecustomer.php">Update Customer</a></li>
+            <li><a href="PP.php">Add Plans</a></li>
+            <li><a href="Editplans.php">Update Subscription </a></li>
+            <li><a href="adinvoice.php">Manage Invoice</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        
+        <div class="content">
+            <div class="cards">
+                <div class="card">
+                    <div class="box">
+                    <h2>View Subscription</h2>
+                    <h3><a href="editP.php">view</h3></a>
+                </div>
+                <div class="icon-case">
+                </div>
+            </div>
+            <div class="card">
+                <div class="box">
+                    <h2>View Workers</h2>
+                    <h3><a href="worker.php">view</h3></a>
+            </div>
+            <div class="icon-case">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function updateCurrentTime() {
+    const currentTimeElement = document.getElementById('currentTime');
+    const now = new Date();
+    const currentTimeString = now.toLocaleTimeString();
+    currentTimeElement.textContent = currentTimeString;
+    }
+
+    // Update the time immediately and every second thereafter
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+</script>

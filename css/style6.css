@@ -1,0 +1,125 @@
+/* General Reset and Box Model */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../image/home.jpg'); /* Make sure the path is correct */
+    background-size: cover;  /* Ensures the image covers the entire screen */
+    background-position: center center;  /* Centers the image */
+    background-attachment: fixed;  /* Keeps the image fixed while scrolling */
+    background-repeat: no-repeat;  /* Prevents image repetition */
+    min-height: 80vh;  /* Ensures the body takes at least the full viewport height */
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;  /* Prevent horizontal scrolling */
+}
+
+/* Header and Navbar styling */
+.header {
+    background-color: #343a40; /* Dark background for the header */
+    padding: 10px 0;
+}
+
+nav.navbar {
+    display: flex; /* Use flexbox to align the items */
+    justify-content: flex-end; /* Align items to the right */
+    padding: 0 20px; /* Space between the links and edges */
+}
+
+nav.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 20px; /* Adds space around the link text */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    margin-left: 10px; /* Space between the buttons */
+}
+
+nav.navbar a:hover {
+    background-color: #007bff; /* Blue background on hover */
+    color: white; /* Change text color on hover */
+}
+
+
+/* Styling for the content container */
+.container {
+    margin-top: 20px; /* Adjust the space below the navbar */
+    text-align: center; /* Centers the content */
+}
+
+/* Card container styling */
+.content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+}
+
+.cards {
+    display: flex;
+    gap: 20px;
+}
+
+/* Individual card styling */
+.card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card .box {
+    padding: 20px;
+}
+
+.card .box h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.card .box h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.card .box h3 a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card .box h3 a:hover {
+    text-decoration: underline;
+}
+
+/* Optional icon case styling (if you want to use it) */
+.icon-case {
+    margin-top: 20px;
+}
+
+/* Ensure the page stays visually appealing and responsive */
+@media (max-width: 768px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+/* Style for the selected section */
+.selected-section h3 {
+    color: white; /* White color for the text */
+    font-size: 24px; /* Adjust the font size as needed */
+    text-align: center; /* Center align the text */
+    padding: 10px 0; /* Add padding for spacing */
+    border-radius: 5px; /* Optional: Rounded corners */
+}

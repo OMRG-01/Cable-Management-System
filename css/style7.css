@@ -1,0 +1,187 @@
+body {
+    background-image: url('../image/maincable.png'); /* Make sure the path is correct */
+    background-size: cover;  /* Ensures the image covers the entire screen */
+    background-position: center center;  /* Centers the image */
+    background-attachment: fixed;  /* Keeps the image fixed while scrolling */
+    background-repeat: no-repeat;  /* Prevents image repetition */
+    min-height: 80vh;  /* Ensures the body takes at least the full viewport height */
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;  /* Prevent horizontal scrolling */
+    margin-top: 60px;
+}
+
+/* Header style */
+.header {
+    height: 4%;
+    width: 100%;
+    background-color: #34495e;
+    padding: 15px 0;
+    color: white;
+    text-align: center;
+    position: relative;
+    position: fixed; /* Fixed position at the top */
+    top: 0; /* Stay at the top */
+    border-bottom: 2px solid white; /* Add a border below the header */
+}
+
+
+
+/* Sidebar style */
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #34495e;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    border-right: 2px solid white;
+}
+
+.sidebar .logo {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    padding: 20px 0;
+}
+
+.sidebar .logo img {
+    width: 100px;
+    margin-right: 10px;
+}
+
+.menu {
+    list-style: none;
+    margin-top: 30px;
+}
+
+.menu li {
+    margin: 20px 0;
+}
+
+.menu li a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.menu li a:hover {
+    background-color: #2980b9;
+}
+.content {
+    margin-left: 260px;
+    padding: 20px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: flex-end ; /* Centers the container horizontally */
+    align-items: flex-start; /* Aligns the content to the top */
+    height: 100vh; /* Ensures the container uses the full viewport height */
+    margin-top: 10px; /* Adjust the top margin as needed */
+}
+
+.content {
+    width: 100%; /* Ensures content takes full width inside the container */
+    max-width: 900px; /* Optional: You can limit the width for better layout */
+}
+
+.cards {
+    display: flex;
+    justify-content: center; /* Centers the card horizontally */
+    flex-wrap: wrap; /* Allows cards to wrap if necessary */
+}
+
+.card {
+    background-color: #f8f9fa; /* Light background color for the card */
+    border-radius: 8px; /* Rounded corners for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px;
+    margin: 10px;
+    width: 200px; /* Set card width */
+    text-align: center; /* Centers the text inside the card */
+}
+
+.box {
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+h3 a {
+    color: #007bff; /* Blue color for the link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+h3 a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Header and Navbar styling */
+
+
+nav.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 20px; /* Adds space around the link text */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+    margin-left: 10px; /* Space between the buttons */
+}
+
+nav.navbar a:hover {
+    background-color: #007bff; /* Blue background on hover */
+    color: white; /* Change text color on hover */
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+  
+}
+
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    margin-top: 30px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 10px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar ul li a:hover {
+    background-color: #2980b9;
+    border-radius: 2px;
+}
+body {
+    margin-top: 60px; /* Add top margin to prevent content from being hidden under the fixed navbar */
+}

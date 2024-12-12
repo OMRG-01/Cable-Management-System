@@ -1,0 +1,220 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('../image/home2.jpg'); /* Make sure the path is correct */
+    background-size: cover;  /* Ensures the image covers the entire screen */
+    background-position: center center;  /* Centers the image */
+    background-attachment: fixed;  /* Keeps the image fixed while scrolling */
+    background-repeat: no-repeat;  /* Prevents image repetition */
+    min-height: 80vh;  /* Ensures the body takes at least the full viewport height */
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;  /* Prevent horizontal scrolling */
+}
+
+.container {
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+.container .title h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding-bottom: 2%;
+    color: #333;
+    text-align: center;
+}
+
+.container .form {
+    width: 100%;
+}
+
+.container .form .input_field {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    
+}
+
+.container .form .input_field label {
+    width: 200px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.container .form .input_field .input {
+    width: 100%;
+    outline: none;
+    font-size: 20px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.container .form .input_field .input:focus {
+    border-color: #0066FF;
+    box-shadow: 0 0 5px rgba(0, 102, 255, 0.5);
+}
+
+.container .form .input_field .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #0066FF;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.container .form .input_field .btn:hover {
+    background-color: #0056e3;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.flex-item {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #218838;
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 20px;
+    }
+
+    .container .title h1 {
+        font-size: 2rem;
+    }
+
+    .container .form .input_field label {
+        font-size: 18px;
+    }
+
+    .button {
+        font-size: 14px;
+    }
+}
+
+.header {
+    width: 100%;
+    background-color: #333; /* Dark background for the header */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header .navbar {
+    display: flex;
+    justify-content: flex-end; /* Align navigation items to the right */
+    padding-right: 20px; /* Add spacing on the right */
+    font-size: 18px; /* Adjust the font size */
+}
+
+.header .navbar ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Center-align navigation items vertically */
+}
+
+.header .navbar li {
+    margin: 0 15px; /* Add spacing between items */
+}
+
+.header .navbar a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text color */
+    padding: 8px 16px; /* Add padding for clickable area */
+    background-color: #0066FF; /* Button-like background color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: bold;
+}
+
+.header .navbar a:hover {
+    background-color: #0056e3; /* Slightly darker blue on hover */
+}
+
+.header .navbar a:active {
+    background-color: #0046c4; /* Even darker blue when active */
+}
+.header {
+    width: 100%;
+    background-color: #333; /* Dark background for the header */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.header .navbar {
+    display: flex;
+    justify-content: flex-end; /* Align navigation items to the right */
+    padding-right: 20px; /* Add spacing on the right */
+    font-size: 18px; /* Adjust the font size */
+}
+
+.header .navbar ul {
+    list-style: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Center-align navigation items vertically */
+}
+
+.header .navbar li {
+    margin: 0 15px; /* Add spacing between items */
+}
+
+.header .navbar a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text color */
+    padding: 8px 16px; /* Add padding for clickable area */
+    background-color: #0066FF; /* Button-like background color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: 100;
+}
+
+.header .navbar a:hover {
+    background-color: #0056e3; /* Slightly darker blue on hover */
+}
+
+.header .navbar a:active {
+    background-color: #0046c4; /* Even darker blue when active */
+}
