@@ -4,7 +4,6 @@ if (!isset($_SESSION['user_name'])) {
     header('Location: 1.customer.php');
     exit;
 }
-<<<<<<< HEAD
 include("connection.php");
 $username = htmlspecialchars($_SESSION['user_name']);
 
@@ -12,7 +11,7 @@ $username = htmlspecialchars($_SESSION['user_name']);
 $stmt = mysqli_prepare($conn, "SELECT sename, selname, sname FROM form1 WHERE hname = ?");
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['user_name']);
 mysqli_stmt_execute($stmt);
-$res = mysqli_stmt_get_result($stmt);
+$res  = mysqli_stmt_get_result($stmt);
 $cust = $res ? mysqli_fetch_assoc($res) : null;
 
 $plan  = $cust ? htmlspecialchars($cust['sename'])  : 'N/A';
@@ -20,8 +19,8 @@ $area  = $cust ? htmlspecialchars($cust['selname']) : 'N/A';
 $stbid = $cust ? htmlspecialchars($cust['sname'])   : 'N/A';
 
 // Pending payments
-$pstmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM form8 f JOIN form1 c ON f.user_id=c.id WHERE c.hname=? AND f.payment_status='Pending'");
 $pending_count = 0;
+$pstmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM form8 f JOIN form1 c ON f.user_id=c.id WHERE c.hname=? AND f.payment_status='Pending'");
 if ($pstmt) {
     mysqli_stmt_bind_param($pstmt, "s", $_SESSION['user_name']);
     mysqli_stmt_execute($pstmt);
@@ -30,17 +29,14 @@ if ($pstmt) {
 }
 
 // Open complaints
-$cstmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM complaints WHERE username=? AND status='Open'");
 $open_complaints = 0;
+$cstmt = mysqli_prepare($conn, "SELECT COUNT(*) FROM complaints WHERE username=? AND status='Open'");
 if ($cstmt) {
     mysqli_stmt_bind_param($cstmt, "s", $_SESSION['user_name']);
     mysqli_stmt_execute($cstmt);
     mysqli_stmt_bind_result($cstmt, $open_complaints);
     mysqli_stmt_fetch($cstmt);
 }
-=======
-$username = htmlspecialchars($_SESSION['user_name']);
->>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,10 +44,8 @@ $username = htmlspecialchars($_SESSION['user_name']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Dashboard - DIGI NETWORK</title>
-<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="css/style7.css?v=3">
     <style>
-        /* Welcome banner */
         .welcome-banner {
             background: linear-gradient(135deg, rgba(139,92,246,0.28) 0%, rgba(45,27,105,0.40) 100%);
             border: 1px solid rgba(139,92,246,0.30);
@@ -95,7 +89,6 @@ $username = htmlspecialchars($_SESSION['user_name']);
         }
         .pill span { color: white; }
 
-        /* Quick stats */
         .quick-stats {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -129,10 +122,9 @@ $username = htmlspecialchars($_SESSION['user_name']);
             text-transform: uppercase;
             letter-spacing: 0.6px;
         }
-        .stat-chip.warn .stat-val { color: #fbbf24; }
+        .stat-chip.warn .stat-val   { color: #fbbf24; }
         .stat-chip.danger .stat-val { color: #f87171; }
 
-        /* Enhanced cards */
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
@@ -204,17 +196,10 @@ $username = htmlspecialchars($_SESSION['user_name']);
             box-shadow: 0 4px 14px rgba(124,58,237,0.40);
         }
     </style>
-=======
-    <link rel="stylesheet" type="text/css" href="css/style7.css">
->>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 </head>
 <body>
     <div class="header">
         <nav class="navbar">
-<<<<<<< HEAD
-=======
-            <a href="aboutus.php">About Us</a>
->>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
             <a href="logout.php">Logout</a>
         </nav>
     </div>
@@ -223,7 +208,6 @@ $username = htmlspecialchars($_SESSION['user_name']);
         <div class="logo">
             <img src="user.png" alt="User" width="40">
             <h4><?php echo $username; ?></h4>
-<<<<<<< HEAD
             <p>Customer</p>
         </div>
         <ul class="menu">
@@ -307,44 +291,6 @@ $username = htmlspecialchars($_SESSION['user_name']);
                     <h2>Complaints</h2>
                     <p class="card-desc">Report issues or track existing complaints</p>
                     <h3><a href="complaints.php">Raise Complaint</a></h3>
-=======
-        </div>
-        <ul class="menu">
-            <li><a href="customerdetails.php">My Details</a></li>
-            <li><a href="upcustomer.php">Update Details</a></li>
-            <li><a href="editplanC.php">Subscription</a></li>
-            <li><a href="pay.php">Payment</a></li>
-            <li><a href="viewcomplaints.php">My Complaints</a></li>
-        </ul>
-    </div>
-
-    <div class="container" style="margin-top:5px;">
-        <div class="content">
-            <div class="cards">
-                <div class="card">
-                    <div class="box">
-                        <h2>My Details</h2>
-                        <h3><a href="customerdetails.php">View</a></h3>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h2>Subscription</h2>
-                        <h3><a href="editplanC.php">View Plans</a></h3>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h2>Payment</h2>
-                        <h3><a href="pay.php">Pay Now</a></h3>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h2>Complaints</h2>
-                        <h3><a href="complaints.php">Raise Complaint</a></h3>
-                    </div>
->>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
                 </div>
             </div>
         </div>
