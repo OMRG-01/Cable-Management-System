@@ -1,95 +1,89 @@
-<?php 
-include ("connection.php"); 
+<?php
+session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
+}
+include("connection.php");
 
-$id = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: displayplan.php');
+    exit;
+}
+$id    = (int)$_GET['id'];
+$error = '';
 
-$query = "SELECT * FROM form2 where id = '$id'";
-$data = mysqli_query($conn, $query);
+if (isset($_POST['register'])) {
+    $plname = trim($_POST['plname']);
+    $pcname = trim($_POST['pcname']);
+    $prname = trim($_POST['prname']);
+    $qname  = trim($_POST['qname']);
 
-$total = mysqli_num_rows($data);
-$result = mysqli_fetch_assoc($data);
+    $stmt = mysqli_prepare($conn, "UPDATE form2 SET plname=?, pcname=?, prname=?, qname=? WHERE id=?");
+    mysqli_stmt_bind_param($stmt, "ssssi", $plname, $pcname, $prname, $qname, $id);
+    if (mysqli_stmt_execute($stmt)) {
+        header('Location: displayplan.php');
+        exit;
+    } else {
+        $error = 'Update failed.';
+    }
+}
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM form2 WHERE id=?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
+if (!$result) {
+    header('Location: displayplan.php');
+    exit;
+}
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="style4.css">
+    <title>Edit Gold Pack Channel</title>
+    <link rel="stylesheet" type="text/css" href="css/style4.css?v=2">
 </head>
-
 <body>
+    <div class="header">
+        <div class="navbar">
+            <ul><li><a href="displayplan.php">Return</a></li></ul>
+        </div>
+    </div>
     <div class="container">
         <form action="#" method="POST">
+            <div class="title"><h1>EDIT CHANNEL</h1></div>
+            <?php if ($error): ?>
+                <p style="color:red;text-align:center;"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
             <div class="form">
                 <div class="input_field">
-                    <label>Plan Name</label>
-                    <input type="text" value="<?php echo $result['plname'];?>" class="input" name="plname" required>
+                    <label>Channel Name</label>
+                    <input type="text" class="input" name="plname" value="<?php echo htmlspecialchars($result['plname']); ?>" required>
                 </div>
                 <div class="input_field">
-                    <label>Plan code</label>
-                    <input type="text" value="<?php echo $result['pcname'];?>" class="input" name="pcname" required>
+                    <label>Channel Code</label>
+                    <input type="text" class="input" name="pcname" value="<?php echo htmlspecialchars($result['pcname']); ?>" required>
                 </div>
                 <div class="input_field">
-                    <label>Price</label>
-                    <input type="number" value="<?php echo $result['prname'];?>" class="input" name="prname">
-                </div>  
+                    <label>Price (Rs.)</label>
+                    <input type="number" class="input" name="prname" value="<?php echo $result['prname']; ?>">
+                </div>
                 <div class="input_field">
                     <label>Quality</label>
-                    <select class="selectbox" value="<?php echo $result['qname'];?>" name="qname" required>
-                        <option>Select</option>
-                        <option value="HD Pack"
-                        <?php
-                                if($result['qname'] == 'HD Pack')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                            >HD Pack</option>
-                        <option value="SD Pack"
-                        <?php
-                                if($result['qname'] == 'SD Pack')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                            >SD Pack</option>
-                        </select>
+                    <select class="selectbox" name="qname" required>
+                        <option value="SD Pack" <?php echo $result['qname']==='SD Pack'?'selected':''; ?>>SD Pack</option>
+                        <option value="HD Pack" <?php echo $result['qname']==='HD Pack'?'selected':''; ?>>HD Pack</option>
+                    </select>
                 </div>
                 <div class="input_field">
-                    <button type="submit" class="btn" value="Register" name="register">Add Plan</button>
-                    </form>
+                    <button type="submit" class="btn" name="register">Update Channel</button>
                 </div>
+            </div>
         </form>
-        </div>
-        </div>
+    </div>
 </body>
 </html>
-<?php 
-    if(isset($_POST['register']))
-    {
-        $plname =$_POST['plname'];
-        $pcname =$_POST['pcname'];
-        $prname =$_POST['prname'];
-        $qname =$_POST['qname'];
-
-        $query = "UPDATE form2 set plname='$plname',pcname='$pcname',prname='$prname',qname='$qname' WHERE id ='$id'";
-        $data = mysqli_query($conn,$query);                                                                                                                                                                                                                                                                                                                                                                                                                                                
-        
-        if($data)
-        {
-            echo "<script>alert('Record Updated')</script>";
-            
-            ?>
-            <meta http-equiv="refresh" content="0; url='http://localhost/CMD/displayplan.php'" />
-
-            <?php
-        }
-        else
-        {
-            echo "Failed to Update";
-        }
-    }
-?>

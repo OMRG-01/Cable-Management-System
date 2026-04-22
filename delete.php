@@ -1,20 +1,23 @@
-<?php 
+<?php
+session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
+}
 include("connection.php");
 
-$Id = $_GET['id'];
-$query ="DELETE FROM form1 WHERE id='$Id'";
-$data =mysqli_query($conn,$query);
-
-if($data)
-{
-    //echo "Record Deleted";
-    ?>
-        <meta http-equiv="refresh" content="1; url='http://localhost/CMD/updatecustomer.php'" />
-    <?php
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: updatecustomer.php');
+    exit;
 }
-else
-{
-    echo "Failed to Delete";
-}
+$Id = (int)$_GET['id'];
 
+$stmt = mysqli_prepare($conn, "DELETE FROM form1 WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $Id);
+if (mysqli_stmt_execute($stmt)) {
+    header('Location: updatecustomer.php');
+} else {
+    echo "Failed to delete: " . mysqli_error($conn);
+}
+exit;
 ?>

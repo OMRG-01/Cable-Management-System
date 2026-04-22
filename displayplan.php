@@ -1,138 +1,70 @@
-<html>
-<head>
-    <title> Display Customers</title>
-    <style>
-     body {
-            background: url('../image/home2.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Header styles */
-         /* Header styles */
-         .header {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .header a {
-            font-size: 20px;
-            color: white;
-            text-decoration: none;
-            border: 1px solid black;
-            padding: 8px 15px;
-            margin-left: 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .header a:hover {
-            background-color: #007bff;
-        }
-        /* Table styling */
-        table {
-            width: 80%;
-            margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-collapse: collapse;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            background-color: #f2f2f2;
-            color: black;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .Edit {
-            background: #4CAF50;
-            color: white;
-            border: 0;
-            outline: none;
-            border-radius: 5px;
-            height: 30px;
-            width: 80px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .Edit:hover {
-            background: darkblue;
-        }
-
-    </style>
-    </head>
-
 <?php
-include("connection.php");
-error_reporting(0);
-
-$query = "SELECT * FROM form2";
-$data = mysqli_query($conn, $query);
-
-$total = mysqli_num_rows($data);
-
-//echo $total;
-if($total != 0)
-{
-    ?>
-    <div class="header">
-            <div class="navbar">
-                <a href="dashboard.html">Home</a>
-                <a href="Editplans.php">Return</a>
-            </div>
-        </div>
-        <h2 align ="center">Gold Pack Plans </h2>
-    <table border="2" cellspacing="7" width="100%">
-        <tr>
-        <th width="5%">id</th>
-        <th width="15%">Plan Name</th> 
-        <th width="10%">Plan code</th>    
-        <th width="5%">Price</th>
-        <th width="10%">Quality</th>
-        <th width="10%">Operation</th>
-        </tr>
-    <?php
-    while($result = mysqli_fetch_assoc($data))
-    {
-        echo "<tr>
-                <td>".$result['id']."</td>
-                <td>".$result['plname']."</td>
-                <td>".$result['pcname']."</td>
-                <td>".$result['prname']."</td>
-                <td>".$result['qname']."</td>
-                <td><a href='update_plan.php?id=$result[id]'><input type='Submit' class='Edit' value='Edit'></a>
-            </tr>";
-    }
-}    
-else
-{ 
-    echo "No records found";
+session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
 }
+include("connection.php");
+
+$data  = mysqli_query($conn, "SELECT * FROM form2 WHERE qname='SD Pack' ORDER BY id");
+$total = mysqli_num_rows($data);
 ?>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Pack Channels</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('home2.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; }
+        body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(160deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.90) 100%); z-index: 0; }
+        .header { position: relative; z-index: 10; background: rgba(15,23,42,0.94); backdrop-filter: blur(14px); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(59,130,246,0.18); }
+        .header span { color: #f1f5f9; font-size: 16px; font-weight: 700; }
+        .header a { color: rgba(255,255,255,0.80); text-decoration: none; border: 1px solid rgba(255,255,255,0.14); padding: 7px 16px; border-radius: 8px; margin-left: 8px; font-size: 13px; font-weight: 600; transition: all 0.25s; }
+        .header a:hover { background: #3b82f6; border-color: #3b82f6; color: white; }
+        h2 { position: relative; z-index: 1; text-align: center; color: #f1f5f9; font-size: 20px; font-weight: 700; margin: 22px 0 16px; }
+        table { position: relative; z-index: 1; width: 82%; margin: 0 auto 30px; border-collapse: collapse; background: rgba(30,41,59,0.92); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 22px rgba(0,0,0,0.30); }
+        th { background: linear-gradient(135deg,#1e3a5f,#1e40af); color: white; padding: 13px 15px; text-align: center; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 12px 15px; text-align: center; color: #cbd5e1; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(59,130,246,0.07); }
+        .btn-edit { background: linear-gradient(135deg,#2563eb,#1d4ed8); color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 12px; font-weight: 600; transition: all 0.2s; }
+        .btn-edit:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(37,99,235,0.40); }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>Gold Pack (SD) Channels</span>
+        <div>
+            <a href="plans.php">+ Add Channel</a>
+            <a href="Editplans.php">Return</a>
+        </div>
+    </div>
+    <h2>Gold Pack Channels (<?php echo $total; ?>)</h2>
+    <?php if ($total > 0): ?>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Channel Name</th>
+            <th>Code</th>
+            <th>Price (Rs.)</th>
+            <th>Quality</th>
+            <th>Actions</th>
+        </tr>
+        <?php while ($row = mysqli_fetch_assoc($data)): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['plname']); ?></td>
+            <td><?php echo htmlspecialchars($row['pcname']); ?></td>
+            <td><?php echo $row['prname']; ?></td>
+            <td><?php echo htmlspecialchars($row['qname']); ?></td>
+            <td><a href="update_plan.php?id=<?php echo $row['id']; ?>" class="btn-edit">Edit</a></td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+    <?php else: ?>
+        <p style="text-align:center;">No channels found.</p>
+    <?php endif; ?>
+</body>
+</html>

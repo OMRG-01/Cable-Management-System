@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i 's|href=\"style4\\\\.css\"|href=\"css/style4.css\"|g' customerdetails.php operator.php plans.php plans2.php upcustomer.php update_design.php update_plan.php update_plan2.php)",
+      "Bash(sed -i 's|href=\"style6\\\\.css\"|href=\"css/style6.css\"|g' editP.php)",
+      "Bash(sed -i 's|href=\"css/style8\\\\.css\"?v=2>|href=\"css/style8.css?v=2\">|g' dashboard.php Editplans.php PP.php)",
+      "Bash(sed -i 's|href=\"css/style7\\\\.css\"?v=2>|href=\"css/style7.css?v=2\">|g' CustomerPage.php)",
+      "Bash(sed -i 's|href=\"css/style9\\\\.css\"?v=2>|href=\"css/style9.css?v=2\">|g' newregister.php)",
+      "Bash(xargs grep *)"
+    ]
+  }
+}

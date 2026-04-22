@@ -1,124 +1,66 @@
-<?php 
+<?php
+session_start();
+if (!isset($_SESSION['user_name'])) {
+    header('Location: 1.customer.php');
+    exit;
+}
 include("connection.php");
 
-session_start();
 $userprofile = $_SESSION['user_name'];
-
-$query = "SELECT * FROM form1 where hname = '$userprofile'";
-$data = mysqli_query($conn, $query);
-
-$result = mysqli_fetch_assoc($data);
-
+$stmt = mysqli_prepare($conn, "SELECT * FROM form1 WHERE hname = ?");
+mysqli_stmt_bind_param($stmt, "s", $userprofile);
+mysqli_stmt_execute($stmt);
+$result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 ?>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="style4.css">
+    <title>My Details</title>
+    <link rel="stylesheet" type="text/css" href="css/style4.css?v=2">
 </head>
-
 <body>
-<div class="header">
-            <div class="navbar">
-                <ul>
-                    <li><a href="CustomerPage.php">Return</a></li>
-                </ul>
-            </div>
+    <div class="header">
+        <div class="navbar">
+            <ul>
+                <li><a href="CustomerPage.php">Return</a></li>
+            </ul>
         </div>
+    </div>
     <div class="container">
-        <form action="#" method="POST">
-            <div class="title">
-                <h1>YOUR DETAILS </h1>
+        <div class="title">
+            <h1>YOUR DETAILS</h1>
+        </div>
+        <div class="form">
+            <div class="input_field">
+                <label>Email ID</label>
+                <input type="text" class="input" value="<?php echo htmlspecialchars($result['cname']); ?>" readonly>
             </div>
-            <div class="form">
-                <div class="input_field">
-                    <label>Email id</label>
-                    <input type="text"class="input" value="<?php echo $result['cname'];?>" name="cname" required>
-                </div>
-                <div class="input_field">
-                    <label>STB-Id</label>
-                    <input type="text" class="input" value="<?php echo $result['sname'];?>" name="sname" required>
-                </div>
-                <div class="input_field">
-                    <label>Phone Number</label>
-                    <input type="text" class="input" value="<?php echo $result['pname'];?>" name="pname">
-                </div>
-                <div>
-                    <div class="input_field">
-                    <label>Area</label>
-                    <select class="selectbox" name="selname" value="<?php echo $result['selname'];?>" required>
-                        <option>Select</option>
-                        <option value="Panchpakadi"
-                        <?php
-                                if($result['selname'] == 'Panchpakadi')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Panchpakadi</option>
-                        <option value="Khopat"
-                        <?php
-                                if($result['selname'] == 'Khopat')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Khopat</option>
-                        <option value="Charai"
-                        <?php
-                                if($result['selname'] == 'Charai')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Charai</option>
-                        <option value="Chandanwadi"
-                        <?php
-                                if($result['selname'] == 'Chandanwadi')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Chandanwadi</option>
-                    </select>
-                    </div>
-                <div class="input_field">
-                    <label>Subscription</label>
-                    <select class="selectbox" name="sename" value="<?php echo $result['sename'];?>" required>
-                        <option>Select</option>
-                        <option value="Premium Pack"
-                            <?php
-                                if($result['sename'] == 'Premium Pack')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Premium Pack</option>
-                        <option value="Gold Pack"
-                            <?php
-                                if($result['sename'] == 'Gold Pack')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Gold Pack</option>Prices according to the selected Subscription
-                        </select>
-                </div>
-                <div class="input_field">
-                    <label>Set Username</label>
-                    <input type="text" class="input" name="hname" value="<?php echo $result['hname'];?>" placeholder="eg.mayur@123" required>
-                </div>
-                <div class="input_field">
-                    <label>Password</label>
-                    <input type="password" class="input" name="rname" value="<?php echo $result['rname'];?>" placeholder="set Password" required>
-                </div>
-            </form>
-                </div>
-        </form>
+            <div class="input_field">
+                <label>STB-ID</label>
+                <input type="text" class="input" value="<?php echo htmlspecialchars($result['sname']); ?>" readonly>
+            </div>
+            <div class="input_field">
+                <label>Phone Number</label>
+                <input type="text" class="input" value="<?php echo htmlspecialchars($result['pname']); ?>" readonly>
+            </div>
+            <div class="input_field">
+                <label>Area</label>
+                <input type="text" class="input" value="<?php echo htmlspecialchars($result['selname']); ?>" readonly>
+            </div>
+            <div class="input_field">
+                <label>Subscription</label>
+                <input type="text" class="input" value="<?php echo htmlspecialchars($result['sename']); ?>" readonly>
+            </div>
+            <div class="input_field">
+                <label>Username</label>
+                <input type="text" class="input" value="<?php echo htmlspecialchars($result['hname']); ?>" readonly>
+            </div>
+            <div class="input_field">
+                <a href="upcustomer.php"><button type="button" class="btn">Update Details</button></a>
+            </div>
         </div>
-        </div>
+    </div>
 </body>
 </html>
