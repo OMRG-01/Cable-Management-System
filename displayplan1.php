@@ -16,6 +16,7 @@ $total = mysqli_num_rows($data);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gold Pack Channels</title>
     <style>
+<<<<<<< HEAD
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('maincable.png'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; }
         body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(135deg, rgba(26,5,51,0.82) 0%, rgba(45,27,105,0.75) 100%); z-index: 0; }
@@ -29,6 +30,18 @@ $total = mysqli_num_rows($data);
         td { padding: 12px 15px; text-align: center; color: #374151; font-size: 13px; border-bottom: 1px solid #f3f4f6; }
         tr:last-child td { border-bottom: none; }
         tr:hover td { background: #f5f3ff; }
+=======
+        body { background: linear-gradient(135deg,#1a1a2e,#16213e); color: white; font-family: Arial, sans-serif; margin: 0; min-height: 100vh; }
+        .header { background: rgba(0,0,0,0.5); padding: 10px 20px; display: flex; justify-content: flex-end; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        h2 { text-align: center; color: #4CAF50; font-size: 1.8rem; }
+        .subtitle { text-align: center; color: #aaa; margin-bottom: 20px; }
+        table { width: 80%; margin: 10px auto 30px; background: rgba(255,255,255,0.92); border-collapse: collapse; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: center; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; color: black; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>

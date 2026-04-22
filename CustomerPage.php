@@ -4,6 +4,7 @@ if (!isset($_SESSION['user_name'])) {
     header('Location: 1.customer.php');
     exit;
 }
+<<<<<<< HEAD
 include("connection.php");
 $username = htmlspecialchars($_SESSION['user_name']);
 
@@ -37,6 +38,9 @@ if ($cstmt) {
     mysqli_stmt_bind_result($cstmt, $open_complaints);
     mysqli_stmt_fetch($cstmt);
 }
+=======
+$username = htmlspecialchars($_SESSION['user_name']);
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +48,7 @@ if ($cstmt) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Dashboard - DIGI NETWORK</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="css/style7.css?v=3">
     <style>
         /* Welcome banner */
@@ -199,10 +204,17 @@ if ($cstmt) {
             box-shadow: 0 4px 14px rgba(124,58,237,0.40);
         }
     </style>
+=======
+    <link rel="stylesheet" type="text/css" href="css/style7.css">
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 </head>
 <body>
     <div class="header">
         <nav class="navbar">
+<<<<<<< HEAD
+=======
+            <a href="aboutus.php">About Us</a>
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
             <a href="logout.php">Logout</a>
         </nav>
     </div>
@@ -211,6 +223,7 @@ if ($cstmt) {
         <div class="logo">
             <img src="user.png" alt="User" width="40">
             <h4><?php echo $username; ?></h4>
+<<<<<<< HEAD
             <p>Customer</p>
         </div>
         <ul class="menu">
@@ -294,6 +307,44 @@ if ($cstmt) {
                     <h2>Complaints</h2>
                     <p class="card-desc">Report issues or track existing complaints</p>
                     <h3><a href="complaints.php">Raise Complaint</a></h3>
+=======
+        </div>
+        <ul class="menu">
+            <li><a href="customerdetails.php">My Details</a></li>
+            <li><a href="upcustomer.php">Update Details</a></li>
+            <li><a href="editplanC.php">Subscription</a></li>
+            <li><a href="pay.php">Payment</a></li>
+            <li><a href="viewcomplaints.php">My Complaints</a></li>
+        </ul>
+    </div>
+
+    <div class="container" style="margin-top:5px;">
+        <div class="content">
+            <div class="cards">
+                <div class="card">
+                    <div class="box">
+                        <h2>My Details</h2>
+                        <h3><a href="customerdetails.php">View</a></h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>Subscription</h2>
+                        <h3><a href="editplanC.php">View Plans</a></h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>Payment</h2>
+                        <h3><a href="pay.php">Pay Now</a></h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="box">
+                        <h2>Complaints</h2>
+                        <h3><a href="complaints.php">Raise Complaint</a></h3>
+                    </div>
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
                 </div>
             </div>
         </div>

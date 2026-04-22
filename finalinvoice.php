@@ -39,6 +39,7 @@ $month_names = ['01'=>'January','02'=>'February','03'=>'March','04'=>'April','05
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice #<?php echo $id; ?></title>
     <style>
+<<<<<<< HEAD
         @media print { .no-print { display: none !important; } body { background: white !important; } body::before { display: none !important; } .invoice-container { box-shadow: none; border: 1px solid #ddd; } }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('home2.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; padding: 28px 16px; position: relative; }
@@ -60,6 +61,24 @@ $month_names = ['01'=>'January','02'=>'February','03'=>'March','04'=>'April','05
         tr:hover td { background: #f8faff; }
         .paid-stamp { position: absolute; top: 32px; right: 52px; border: 4px solid #10b981; border-radius: 6px; color: #10b981; font-size: 1.6rem; font-weight: 800; padding: 6px 14px; opacity: 0.55; transform: rotate(-15deg); letter-spacing: 2px; }
         p[style*="text-align:center"] { color: #888; font-size: 12px; text-align: center; margin-top: 4px; }
+=======
+        @media print { .no-print { display: none; } body { background: white; } }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        .no-print { text-align: center; margin-bottom: 15px; }
+        .no-print a { padding: 8px 20px; background: #6c757d; color: white; border-radius: 5px; text-decoration: none; margin-right: 10px; }
+        .invoice-container { width: 700px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; }
+        .invoice-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #4CAF50; padding-bottom: 15px; margin-bottom: 20px; }
+        .company-name { font-size: 1.5rem; font-weight: bold; color: #2e7d32; }
+        .invoice-meta { text-align: right; font-size: 13px; color: #555; }
+        h2 { text-align: center; margin-bottom: 20px; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 11px 14px; text-align: left; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; }
+        .paid-stamp { position: absolute; top: 30px; right: 50px; border: 5px solid #4CAF50; border-radius: 5px; color: #4CAF50; font-size: 1.8rem; font-weight: bold; padding: 8px 15px; opacity: 0.6; transform: rotate(-15deg); }
+        .print-btn { display: block; margin: 0 auto; padding: 10px 25px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 15px; }
+        .print-btn:hover { background: #0056b3; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>

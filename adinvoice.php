@@ -32,6 +32,7 @@ $total = mysqli_num_rows($data);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Invoices</title>
     <style>
+<<<<<<< HEAD
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('home2.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; }
         body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(160deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.90) 100%); z-index: 0; }
@@ -55,6 +56,24 @@ $total = mysqli_num_rows($data);
         .badge-pending { background: rgba(245,158,11,0.18); color: #fcd34d; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; border: 1px solid rgba(245,158,11,0.30); }
         .badge-paid    { background: rgba(16,185,129,0.18); color: #6ee7b7; padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 700; border: 1px solid rgba(16,185,129,0.30); }
         p[style*="text-align:center"] { position: relative; z-index: 1; color: #94a3b8; padding: 20px; }
+=======
+        body { background: #1a1a2e; color: white; font-family: Arial, sans-serif; margin: 0; }
+        .header { background: rgba(0,0,0,0.6); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        .filter-bar { text-align: center; margin: 15px; }
+        .filter-bar a { color: white; text-decoration: none; border: 1px solid #aaa; padding: 6px 16px; border-radius: 20px; margin: 0 5px; font-size: 13px; }
+        .filter-bar a.active, .filter-bar a:hover { background: #4CAF50; border-color: #4CAF50; }
+        h2 { text-align: center; color: white; }
+        table { width: 98%; margin: 10px auto; background: rgba(255,255,255,0.92); border-collapse: collapse; font-size: 13px; }
+        th, td { padding: 10px; text-align: center; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; color: black; }
+        .btn-green  { background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 12px; }
+        .btn-blue   { background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 12px; }
+        .badge-pending { background: #ffc107; color: #333; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .badge-paid    { background: #28a745; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>

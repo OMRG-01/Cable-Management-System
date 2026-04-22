@@ -41,6 +41,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Raise Complaint</title>
     <style>
+<<<<<<< HEAD
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('maincable.png'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; }
         body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(135deg, rgba(26,5,51,0.82) 0%, rgba(45,27,105,0.75) 100%); z-index: 0; }
@@ -62,6 +63,25 @@ if (isset($_POST['submit'])) {
         .view-link { text-align: center; margin-top: 18px; }
         .view-link a { color: #a78bfa; font-size: 14px; text-decoration: none; font-weight: 500; }
         .view-link a:hover { color: white; }
+=======
+        body { font-family: Arial, sans-serif; background: #f0f4f8; margin: 0; }
+        .header { background: #2e7d32; color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header h2 { margin: 0; font-size: 1.2rem; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 6px 14px; border-radius: 5px; font-size: 13px; }
+        .header a:hover { background: rgba(255,255,255,0.2); }
+        .container { max-width: 620px; margin: 30px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2e7d32; text-align: center; margin-top: 0; }
+        label { display: block; margin: 12px 0 4px; font-weight: bold; color: #333; }
+        input[type=text], select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; }
+        textarea { height: 120px; resize: vertical; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #4CAF50; }
+        button { background: #2e7d32; color: white; padding: 11px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 15px; width: 100%; margin-top: 15px; }
+        button:hover { background: #1b5e20; }
+        .msg-ok  { background: #e8f5e9; border-left: 4px solid #4CAF50; padding: 10px 14px; margin-bottom: 15px; color: #2e7d32; border-radius: 4px; }
+        .msg-err { background: #fce4ec; border-left: 4px solid #e53935; padding: 10px 14px; margin-bottom: 15px; color: #c62828; border-radius: 4px; }
+        .view-link { text-align: center; margin-top: 15px; }
+        .view-link a { color: #2e7d32; font-size: 14px; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>

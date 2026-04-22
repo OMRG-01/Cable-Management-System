@@ -34,6 +34,7 @@ $total = mysqli_num_rows($data);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Complaints</title>
     <style>
+<<<<<<< HEAD
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('home2.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; }
         body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(160deg, rgba(15,23,42,0.94) 0%, rgba(15,23,42,0.90) 100%); z-index: 0; }
@@ -61,6 +62,29 @@ $total = mysqli_num_rows($data);
         .btn-save:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(16,185,129,0.45); }
         .existing-reply { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #6ee7b7; margin-bottom: 10px; }
         p[style*="text-align:center"] { position: relative; z-index: 1; color: #94a3b8; }
+=======
+        body { background: #1a1a2e; color: white; font-family: Arial, sans-serif; margin: 0; }
+        .header { background: rgba(0,0,0,0.6); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        .filter-bar { text-align: center; margin: 15px; }
+        .filter-bar a { color: white; text-decoration: none; border: 1px solid #aaa; padding: 6px 16px; border-radius: 20px; margin: 0 5px; font-size: 13px; }
+        .filter-bar a.active, .filter-bar a:hover { background: #4CAF50; border-color: #4CAF50; }
+        h2 { text-align: center; }
+        .card { background: white; color: black; border-radius: 8px; padding: 18px; margin: 12px auto; max-width: 800px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .c-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .c-subject { font-weight: bold; font-size: 1rem; }
+        .c-meta { font-size: 12px; color: #888; margin-bottom: 8px; }
+        .c-message { color: #333; margin-bottom: 10px; background: #f9f9f9; padding: 10px; border-radius: 5px; font-size: 14px; }
+        .badge-open     { background: #fff3cd; color: #856404; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .badge-resolved { background: #d1ecf1; color: #0c5460; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .badge-closed   { background: #e2e3e5; color: #383d41; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; resize: vertical; height: 80px; box-sizing: border-box; }
+        select { padding: 7px 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 13px; margin-right: 10px; }
+        .btn-save { background: #28a745; color: white; border: none; padding: 8px 18px; border-radius: 5px; cursor: pointer; font-size: 13px; }
+        .btn-save:hover { background: #1e7e34; }
+        .existing-reply { background: #e8f5e9; border-radius: 5px; padding: 10px; font-size: 13px; color: #2e7d32; margin-bottom: 8px; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>

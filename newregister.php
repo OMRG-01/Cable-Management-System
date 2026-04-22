@@ -40,7 +40,11 @@ if (isset($_POST['register'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>New Registration</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="css/style9.css?v=2">
+=======
+    <link rel="stylesheet" type="text/css" href="css/style9.css">
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 </head>
 <body>
     <div class="container">
@@ -108,6 +112,7 @@ if (isset($_POST['register'])) {
                 <div class="input_field">
                     <button type="submit" class="btn" name="register">Register</button>
                 </div>
+<<<<<<< HEAD
             </div>
         </form>
         <div class="flex">
@@ -115,6 +120,15 @@ if (isset($_POST['register'])) {
                 <button class="button">Back to Login</button>
             </form>
         </div>
+=======
+                <div class="flex">
+                    <form action="1.customer.php" class="flex-item">
+                        <button class="button">Back to Login</button>
+                    </form>
+                </div>
+            </div>
+        </form>
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </div>
 </body>
 </html>

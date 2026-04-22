@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Connection Request - DIGI NETWORK</title>
     <style>
+<<<<<<< HEAD
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('home2.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; padding: 28px 16px; position: relative; }
         body::before { content: ''; position: fixed; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,0.90) 0%, rgba(30,58,138,0.82) 50%, rgba(15,23,42,0.90) 100%); z-index: 0; }
@@ -61,11 +62,39 @@ if (isset($_POST['submit'])) {
         button[type=submit]:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.58); }
         .msg-ok  { background: rgba(16,185,129,0.15); border-left: 4px solid #10b981; padding: 12px 16px; border-radius: 6px; color: #6ee7b7; margin-bottom: 22px; font-size: 14px; }
         .msg-err { background: rgba(239,68,68,0.15); border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: 6px; color: #fca5a5; margin-bottom: 22px; font-size: 14px; }
+=======
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #1a1a2e, #16213e); min-height: 100vh; margin: 0; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; max-width: 700px; margin: 0 auto 20px; }
+        .brand { color: #4CAF50; font-size: 1.4rem; font-weight: bold; }
+        .header a { color: #ccc; text-decoration: none; border: 1px solid #ccc; padding: 6px 14px; border-radius: 5px; font-size: 13px; }
+        .container { max-width: 700px; margin: 0 auto; background: white; padding: 35px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        h1 { color: #2e7d32; text-align: center; margin-top: 0; font-size: 1.6rem; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 25px; font-size: 14px; }
+        label { display: block; margin: 12px 0 4px; font-weight: bold; color: #444; font-size: 14px; }
+        input[type=text], input[type=email], textarea, select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box; }
+        input:focus, select:focus, textarea:focus { border-color: #4CAF50; outline: none; }
+        textarea { height: 80px; resize: vertical; }
+        .plan-cards { display: flex; gap: 15px; margin: 10px 0; }
+        .plan-card { flex: 1; border: 2px solid #ddd; border-radius: 8px; padding: 14px; cursor: pointer; text-align: center; transition: all 0.2s; }
+        .plan-card:hover { border-color: #4CAF50; background: #f1f8e9; }
+        .plan-card input { display: none; }
+        .plan-card h3 { margin: 0 0 5px; color: #333; font-size: 1rem; }
+        .plan-card p { margin: 3px 0; font-size: 12px; color: #666; }
+        .plan-card .price { font-size: 1.1rem; font-weight: bold; color: #2e7d32; }
+        button[type=submit] { background: #2e7d32; color: white; width: 100%; padding: 13px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        button[type=submit]:hover { background: #1b5e20; }
+        .msg-ok  { background: #e8f5e9; border-left: 4px solid #4CAF50; padding: 12px 16px; border-radius: 4px; color: #2e7d32; margin-bottom: 20px; font-size: 14px; }
+        .msg-err { background: #fce4ec; border-left: 4px solid #e53935; padding: 12px 16px; border-radius: 4px; color: #c62828; margin-bottom: 20px; font-size: 14px; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>
     <div class="header">
+<<<<<<< HEAD
         <span class="brand">DIGI <span>NETWORK</span></span>
+=======
+        <span class="brand">DIGI NETWORK</span>
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
         <a href="1.customer.php">Login / Home</a>
     </div>
     <div class="container">

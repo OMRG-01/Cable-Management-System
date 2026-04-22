@@ -24,6 +24,7 @@ $available_stb     = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM stb_inv
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - DIGI NETWORK</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/style8.css?v=2">
     <style>
         /* stats-bar override — style8.css handles all other layout */
@@ -49,6 +50,27 @@ $available_stb     = mysqli_num_rows(mysqli_query($conn, "SELECT id FROM stb_inv
         }
         .stat-card h3 { font-size: 2rem; font-weight: 700; color: #3b82f6; margin: 0 0 5px; line-height: 1; }
         .stat-card p  { font-size: 10.5px; color: #94a3b8; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
+=======
+    <link rel="stylesheet" href="css/style8.css">
+    <style>
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px 20px;
+            justify-content: center;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 14px 22px;
+            text-align: center;
+            min-width: 130px;
+        }
+        .stat-card h3 { margin: 4px 0 0; font-size: 1.8rem; color: #4CAF50; }
+        .stat-card p  { margin: 0; font-size: 0.78rem; color: #ccc; }
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </style>
 </head>
 <body>

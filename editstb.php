@@ -49,7 +49,11 @@ if (!$stb) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Edit STB</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="css/style4.css?v=2">
+=======
+    <link rel="stylesheet" type="text/css" href="css/style4.css">
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 </head>
 <body>
     <div class="header">

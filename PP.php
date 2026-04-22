@@ -11,7 +11,11 @@ if (!isset($_SESSION['admin_name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Plans</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/style8.css?v=2">
+=======
+    <link rel="stylesheet" href="css/style8.css">
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
 </head>
 <body>
     <div class="header">

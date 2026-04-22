@@ -45,6 +45,7 @@ $month_names = ['01'=>'January','02'=>'February','03'=>'March','04'=>'April','05
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Receipt</title>
     <style>
+<<<<<<< HEAD
         @media print { body::before { display: none !important; } body { background: white !important; } .receipt { box-shadow: none !important; border: 1px solid #ddd !important; background: white !important; } .no-print { display: none !important; } th { background: #4CAF50 !important; -webkit-print-color-adjust: exact; } }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-image: url('maincable.png'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; padding: 30px 16px; position: relative; }
@@ -70,6 +71,23 @@ $month_names = ['01'=>'January','02'=>'February','03'=>'March','04'=>'April','05
     <div class="no-print">
         <button class="btn btn-print" onclick="window.print()">Print Receipt</button>
     </div>
+=======
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        .receipt { background: white; width: 600px; margin: 0 auto; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #4CAF50; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+        th { background: #4CAF50; color: white; width: 40%; }
+        td { background: #f9f9f9; }
+        .status { display: inline-block; background: #ffc107; color: #333; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
+        .btn { display: block; margin: 15px auto 0; padding: 10px 30px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 15px; text-decoration: none; text-align: center; width: fit-content; }
+        .btn:hover { background: #0056b3; }
+        .btn-print { background: #28a745; }
+        .note { background: #e8f5e9; border-left: 4px solid #4CAF50; padding: 12px; margin-top: 15px; font-size: 13px; color: #555; }
+    </style>
+</head>
+<body>
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     <div class="receipt">
         <h1>Payment Receipt</h1>
         <p style="text-align:center;color:#888;">Reference #<?php echo $payment_info['id']; ?> &mdash; <?php echo date('d M Y'); ?></p>
@@ -88,9 +106,15 @@ $month_names = ['01'=>'January','02'=>'February','03'=>'March','04'=>'April','05
             For queries: <strong>9987452112</strong>
         </div>
         <br>
+<<<<<<< HEAD
         <div style="text-align:center;margin-top:20px;">
             <a href="CustomerPage.php" class="btn">Back to Dashboard</a>
         </div>
+=======
+        <a href="CustomerPage.php" class="btn">Back to Dashboard</a>
+        <br>
+        <button class="btn btn-print" onclick="window.print()">Print Receipt</button>
+>>>>>>> f4d76211c5e28b18bc4efdae812dc17bf57f688c
     </div>
 </body>
 </html>
