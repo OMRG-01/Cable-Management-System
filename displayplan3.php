@@ -1,147 +1,60 @@
-<html>
+<?php
+session_start();
+if (!isset($_SESSION['user_name'])) {
+    header('Location: 1.customer.php');
+    exit;
+}
+include("connection.php");
+
+$data  = mysqli_query($conn, "SELECT * FROM form5 WHERE uname='HD Pack' ORDER BY id");
+$total = mysqli_num_rows($data);
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Display Customers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Pack Channels</title>
     <style>
-        /* Set the background image */
-        body {
-            background: url('home2.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Header styles */
-        .header .navbar {
-            font-size: 20px;
-            width: 100%;
-            display: flex;
-        }
-
-        .header .navbar ul {
-            color: white;
-            width: 100%;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 10px;
-        }
-
-        .header .navbar li {
-            text-decoration: none;
-            margin-top: 10px;
-            padding: 0px 10px;
-            margin-right: 20px;
-        }
-
-        .header .navbar a {
-            font-size: 25px;
-            color: white;
-            text-decoration: none;
-            border: 1px solid black;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .header .navbar a:hover {
-            background-color: #007bff;
-        }
-
-        /* Table styling */
-        table {
-            width: 80%;
-            margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-collapse: collapse;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            background-color: #f2f2f2;
-            color:black;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 2rem;
-            color: white;
-        }
-
-        /* Styling for no records found message */
-        .no-records {
-            text-align: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-top: 20px;
-        }
-
+        body { background: linear-gradient(135deg,#1a1a2e,#16213e); color: white; font-family: Arial, sans-serif; margin: 0; min-height: 100vh; }
+        .header { background: rgba(0,0,0,0.5); padding: 10px 20px; display: flex; justify-content: flex-end; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        h2 { text-align: center; color: #4CAF50; font-size: 1.8rem; }
+        .subtitle { text-align: center; color: #aaa; margin-bottom: 20px; }
+        table { width: 80%; margin: 10px auto 30px; background: rgba(255,255,255,0.92); border-collapse: collapse; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: center; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; color: black; }
     </style>
 </head>
-
-<?php
-include("connection.php");
-error_reporting(0);
-
-$query = "SELECT * FROM form5";
-$data = mysqli_query($conn, $query);
-
-$total = mysqli_num_rows($data);
-
-if($total != 0) {
-    ?>
+<body>
     <div class="header">
-        <div class="navbar">
-            <ul>
-                <li><a href="editplanC.php">Return</a></li>
-            </ul>
-        </div>
+        <a href="editplanC.php">&#8592; Back</a>
     </div>
-
-    <h2>Plans (All HD Channels)</h2>
-
+    <h2>Premium Pack — HD Channels</h2>
+    <p class="subtitle">Rs. 650/month &bull; <?php echo $total; ?> HD channels included</p>
+    <?php if ($total > 0): ?>
     <table>
         <tr>
-            <th width="5%">id</th>
-            <th width="15%">Plan Name</th>
-            <th width="10%">Plan code</th>
-            <th width="5%">Price</th>
-            <th width="10%">Quality</th>
+            <th>#</th>
+            <th>Channel Name</th>
+            <th>Code</th>
+            <th>Price</th>
+            <th>Quality</th>
         </tr>
-        <?php
-        while($result = mysqli_fetch_assoc($data)) {
-            echo "<tr>
-                    <td>".$result['id']."</td>
-                    <td>".$result['mname']."</td>
-                    <td>".$result['aname']."</td>
-                    <td>".$result['yname']."</td>
-                    <td>".$result['uname']."</td>
-                </tr>";
-        }
-        ?>
+        <?php while ($row = mysqli_fetch_assoc($data)): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['mname']); ?></td>
+            <td><?php echo htmlspecialchars($row['aname']); ?></td>
+            <td>Rs. <?php echo $row['yname']; ?></td>
+            <td><?php echo htmlspecialchars($row['uname']); ?></td>
+        </tr>
+        <?php endwhile; ?>
     </table>
-
-<?php
-} else {
-    echo "<div class='no-records'>No records found</div>";
-}
-?>
-
+    <?php else: ?>
+        <p style="text-align:center;color:#aaa;">No channels listed yet.</p>
+    <?php endif; ?>
 </body>
 </html>

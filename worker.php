@@ -1,178 +1,72 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
+}
+include("connection.php");
+
+$data  = mysqli_query($conn, "SELECT * FROM form6 ORDER BY id");
+$total = mysqli_num_rows($data);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanics</title>
+    <title>Workers</title>
     <style>
-         body {
-            background: url('../image/home2.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 2rem;
-        }
-
-        table {
-            margin: 20px auto;
-            text-align: center;
-            background: yellow;
-            width: 80%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 15px;
-            border: 1px solid black;
-        }
-
-        th {
-            background-color: #2c3e50;
-            color: white;
-        }
-
-        td {
-            background-color: #f2f2f2;
-            color: black;
-        }
-
-        .Update, .Delete {
-            background: yellow;
-            color: blaack;
-            border: 0;
-            outline: none;
-            border-radius: 5px;
-            height: 30px;
-            width: 80px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .Delete {
-            background: red;
-        }
-
-        .button {
-            display: flex;
-            background-color: #f05462;
-            color: white;
-            font-size: 20px;
-            position: absolute;
-            top: 5px;
-            right: 100px;
-            text-decoration: none;
-            border-color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-
-        /* Header styles */
-        .header .navbar {
-            font-size: 20px;
-            width: 100%;
-            display: flex;
-        }
-
-        .header .navbar ul {
-            color: white;
-            width: 100%;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 10px;
-        }
-
-        .header .navbar li {
-            text-decoration: none;
-            margin-top: 10px;
-            padding: 0px 10px;
-            margin-right: 20px;
-        }
-
-        .header .navbar a {
-            font-size: 25px;
-            color: white;
-            text-decoration: none;
-            border: 1px solid black;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .header .navbar a:hover {
-            background-color: #007bff;
-        }
+        body { background: #1a1a2e; color: white; font-family: Arial, sans-serif; margin: 0; }
+        .header { background: rgba(0,0,0,0.6); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        .btn-add { background: #28a745; color: white; text-decoration: none; padding: 8px 18px; border-radius: 5px; font-size: 14px; }
+        h2 { text-align: center; color: white; }
+        table { width: 85%; margin: 20px auto; background: rgba(255,255,255,0.92); border-collapse: collapse; border-radius: 8px; }
+        th, td { padding: 12px 15px; text-align: center; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; color: black; }
+        .btn-edit { background: #007bff; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 13px; }
+        .btn-del  { background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 13px; }
     </style>
 </head>
 <body>
-
-<?php
-include("connection.php");
-error_reporting(0);
-
-$query = "SELECT * FROM form6";
-$data = mysqli_query($conn, $query);
-
-$total = mysqli_num_rows($data);
-
-if($total != 0) {
-    ?>
-    <h2>Workers</h2>
     <div class="header">
-        <div class="navbar">
-            <ul>
-                <li><a href="dashboard.html">Return</a></li>
-            </ul>
+        <span>Workers / Technicians</span>
+        <div>
+            <a href="addworker.php" class="btn-add">+ Add Worker</a>
+            <a href="dashboard.php">Dashboard</a>
         </div>
     </div>
-
+    <h2>Workers (<?php echo $total; ?>)</h2>
+    <?php if ($total > 0): ?>
     <table>
         <tr>
-            <th width="5%">Id</th> 
-            <th width="10%">Name</th>    
-            <th width="10%">Phone Number</th>
-            <th width="10%">Post</th>
-            <th width="10%">Salary</th>
-            <th width="15%">Operations</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Designation</th>
+            <th>Salary (Rs.)</th>
+            <th>Actions</th>
         </tr>
-
-        <?php
-        while($result = mysqli_fetch_assoc($data)) {
-            echo "<tr>
-                    <td>".$result['id']."</td>
-                    <td>".$result['sname']."</td>
-                    <td>".$result['uname']."</td>
-                    <td>".$result['dname']."</td>
-                    <td>".$result['hname']."</td>
-                    <td>
-                        <a href='editworker.php?id=$result[id]'>
-                            <button class='Update'>Edit</button>
-                        </a>
-                        <a href='deleteworker.php?id=$result[id]' onclick='return checkdelete()'>
-                            <button class='Delete'>Delete</button>
-                        </a>
-                    </td>
-                </tr>";
-        }
-    } else { 
-        echo "<p align='center' class='no-records'>No records found</p>";
-    }
-    ?>
+        <?php while ($row = mysqli_fetch_assoc($data)): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['sname']); ?></td>
+            <td><?php echo htmlspecialchars($row['uname']); ?></td>
+            <td><?php echo htmlspecialchars($row['dname']); ?></td>
+            <td><?php echo number_format($row['hname']); ?></td>
+            <td>
+                <a href="editworker.php?id=<?php echo $row['id']; ?>" class="btn-edit">Edit</a>
+                &nbsp;
+                <a href="deleteworker.php?id=<?php echo $row['id']; ?>" class="btn-del"
+                   onclick="return confirm('Delete this worker?')">Delete</a>
+            </td>
+        </tr>
+        <?php endwhile; ?>
     </table>
-    
-    <script>
-        function checkdelete() {
-            return confirm('Are you sure you want to delete this record?');
-        }
-    </script>
+    <?php else: ?>
+        <p style="text-align:center;">No workers found. <a href="addworker.php" style="color:#4CAF50;">Add one now.</a></p>
+    <?php endif; ?>
 </body>
 </html>

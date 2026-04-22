@@ -1,18 +1,14 @@
 <?php
-error_reporting(0);
-    $servername = "localhost";
-    $username ="root";
-    $password = "";
-    $dbname = "responsiveform";
+$servername = "localhost";
+$username   = "root";
+$password   = "";
+$dbname     = "responsiveform";
 
-$conn = mysqli_connect($servername,$username,$password,$dbname);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-if($conn)
-{
-    //echo "Connection ok";
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
 }
-else
-{
-    echo "Connection Failed" .mysqli_connect_error();
-}
+
+mysqli_set_charset($conn, "utf8mb4");
 ?>

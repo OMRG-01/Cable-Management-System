@@ -1,152 +1,107 @@
-<html>
-<head>
-    <title> Display Customers</title>
-    <style>
-     body {
-            background: url('home2.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-         /* Header styles */
-         .header {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .header a {
-            font-size: 20px;
-            color: white;
-            text-decoration: none;
-            border: 1px solid black;
-            padding: 8px 15px;
-            margin-left: 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .header a:hover {
-            background-color: #007bff;
-        }
-        /* Table styling */
-        table {
-            width: 80%;
-            margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-collapse: collapse;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            background-color: #f2f2f2;
-            color: black;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .Update {
-            background: #4CAF50;
-            color: white;
-            border: 0;
-            outline: none;
-            border-radius: 5px;
-            height: 30px;
-            width: 80px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .Update:hover {
-            background: darkblue;
-        }
-        </style>
-    </head>
-
 <?php
-include("connection.php");
-error_reporting(0);
-
-// Fetch data from `form8`
-$query = "SELECT * FROM form8";
-$data = mysqli_query($conn, $query);
-
-$total = mysqli_num_rows($data);
-
-if ($total != 0) {
-    ?>
-    <div class="header">
-        <div class="navbar">
-            <a href="dashboard.html">Return</a>
-        </div>
-    </div>
-    <h2 align="center">Displaying all records</h2>
-    
-    <table border="2" cellspacing="10" width="100%">
-        <tr>
-            <th width="5%">Id</th>
-            <th width="10%">User ID</th>
-            <th width="15%">UPI Name</th>
-            <th width="15%">Package Name</th>
-            <th width="5%">Month</th>
-            <th width="15%">Mode Name</th>
-            <th width="10%">Price</th>
-            <th width="15%">Transaction ID</th>
-            <th width="10%">Payment Status</th>
-            <th width="10%">Operations</th>
-        </tr>
-    <?php
-    // Loop through and display records
-    while ($result = mysqli_fetch_assoc($data)) {
-        echo "<tr>
-                <td>" . $result['id'] . "</td>
-                <td>" . $result['user_id'] . "</td>
-                <td>" . $result['UPI_name'] . "</td>
-                <td>" . $result['Package_name'] . "</td>
-                <td>" . $result['month'] . "</td>
-                <td>" . $result['Mode_name'] . "</td>
-                <td>" . $result['Price'] . "</td>
-                <td>" . $result['Transaction_ID'] . "</td>
-                <td>" . $result['payment_status'] . "</td>
-                <td><a href='finalinvoice.php?id=" . $result['id'] . "'><input type='submit' value='Generate' class='Update'></a></td>
-            </tr>";
-    }
-    ?>
-    </table>
-    <?php
-} else {
-    echo "<h2 align='center'>No records found</h2>";
+session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
 }
+include("connection.php");
+
+// Handle mark as paid inline
+if (isset($_GET['markpaid']) && is_numeric($_GET['markpaid'])) {
+    $pid = (int)$_GET['markpaid'];
+    $upd = mysqli_prepare($conn, "UPDATE form8 SET payment_status='Paid' WHERE id=?");
+    mysqli_stmt_bind_param($upd, "i", $pid);
+    mysqli_stmt_execute($upd);
+    header('Location: adinvoice.php');
+    exit;
+}
+
+// Filter
+$filter  = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+$where   = '';
+if ($filter === 'pending') $where = " WHERE payment_status='Pending'";
+if ($filter === 'paid')    $where = " WHERE payment_status='Paid'";
+
+$data  = mysqli_query($conn, "SELECT * FROM form8$where ORDER BY id DESC");
+$total = mysqli_num_rows($data);
 ?>
-
-</table>
-
-<script>
-    function checkdelete()
-    {
-        return confirm('Are you sure want to delete this record ?');
-    }
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Invoices</title>
+    <style>
+        body { background: #1a1a2e; color: white; font-family: Arial, sans-serif; margin: 0; }
+        .header { background: rgba(0,0,0,0.6); padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        .filter-bar { text-align: center; margin: 15px; }
+        .filter-bar a { color: white; text-decoration: none; border: 1px solid #aaa; padding: 6px 16px; border-radius: 20px; margin: 0 5px; font-size: 13px; }
+        .filter-bar a.active, .filter-bar a:hover { background: #4CAF50; border-color: #4CAF50; }
+        h2 { text-align: center; color: white; }
+        table { width: 98%; margin: 10px auto; background: rgba(255,255,255,0.92); border-collapse: collapse; font-size: 13px; }
+        th, td { padding: 10px; text-align: center; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; color: black; }
+        .btn-green  { background: #28a745; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 12px; }
+        .btn-blue   { background: #007bff; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 12px; }
+        .badge-pending { background: #ffc107; color: #333; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .badge-paid    { background: #28a745; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>Manage Invoices</span>
+        <a href="dashboard.php">Dashboard</a>
+    </div>
+    <div class="filter-bar">
+        <a href="?filter=all"     class="<?php echo $filter=='all'?'active':''; ?>">All</a>
+        <a href="?filter=pending" class="<?php echo $filter=='pending'?'active':''; ?>">Pending</a>
+        <a href="?filter=paid"    class="<?php echo $filter=='paid'?'active':''; ?>">Paid</a>
+    </div>
+    <h2>Payment Records (<?php echo $total; ?>)</h2>
+    <?php if ($total > 0): ?>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>User ID</th>
+            <th>Package</th>
+            <th>Month</th>
+            <th>Mode</th>
+            <th>Amount</th>
+            <th>Transaction ID</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        <?php while ($row = mysqli_fetch_assoc($data)): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['user_id']; ?></td>
+            <td><?php echo htmlspecialchars($row['Package_name']); ?></td>
+            <td><?php echo $row['month']; ?></td>
+            <td><?php echo htmlspecialchars($row['Mode_name']); ?></td>
+            <td>Rs. <?php echo $row['Price']; ?></td>
+            <td><?php echo htmlspecialchars($row['Transaction_ID']); ?></td>
+            <td>
+                <?php if ($row['payment_status'] === 'Paid'): ?>
+                    <span class="badge-paid">Paid</span>
+                <?php else: ?>
+                    <span class="badge-pending">Pending</span>
+                <?php endif; ?>
+            </td>
+            <td>
+                <a href="finalinvoice.php?id=<?php echo $row['id']; ?>" class="btn-blue">Invoice</a>
+                <?php if ($row['payment_status'] !== 'Paid'): ?>
+                    &nbsp;<a href="?markpaid=<?php echo $row['id']; ?>" class="btn-green"
+                       onclick="return confirm('Mark this payment as Paid?')">Mark Paid</a>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+    <?php else: ?>
+        <p style="text-align:center;">No records found.</p>
+    <?php endif; ?>
+</body>
+</html>

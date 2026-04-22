@@ -1,13 +1,16 @@
-<?php 
+<?php
+session_start();
+if (!isset($_SESSION['user_name'])) {
+    header('Location: 1.customer.php');
+    exit;
+}
 include("connection.php");
 
-session_start();
 $userprofile = $_SESSION['user_name'];
-
-$query = "SELECT * FROM form1 WHERE hname = '$userprofile'";
-$data = mysqli_query($conn, $query);
-
-$result = mysqli_fetch_assoc($data);
+$stmt = mysqli_prepare($conn, "SELECT * FROM form1 WHERE hname = ?");
+mysqli_stmt_bind_param($stmt, "s", $userprofile);
+mysqli_stmt_execute($stmt);
+$result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +24,7 @@ $result = mysqli_fetch_assoc($data);
 <div class="header">
     <nav class="navbar">
         <a href="CustomerPage.php">Return</a>
-        <a href="1.customer.php">Logout</a>
+        <a href="logout.php">Logout</a>
     </nav>
 </div>
 

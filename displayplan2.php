@@ -1,137 +1,65 @@
-<html>
-<head>
-    <title> Display Customers</title>
-    <style>
-        body {
-            background: url('home2.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-         /* Header styles */
-         .header {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .header a {
-            font-size: 20px;
-            color: white;
-            text-decoration: none;
-            border: 1px solid black;
-            padding: 8px 15px;
-            margin-left: 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .header a:hover {
-            background-color: #007bff;
-        }
-        /* Table styling */
-        table {
-            width: 80%;
-            margin: 50px auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-collapse: collapse;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        td {
-            background-color: #f2f2f2;
-            color: black;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .Edit {
-            background: #4CAF50;
-            color: white;
-            border: 0;
-            outline: none;
-            border-radius: 5px;
-            height: 30px;
-            width: 80px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .Edit:hover {
-            background: darkblue;
-        }
-
-        </style>
-    </head>
-
 <?php
-include("connection.php");
-error_reporting(0);
-
-$query = "SELECT * FROM form5";
-$data = mysqli_query($conn, $query);
-
-$total = mysqli_num_rows($data);
-
-//echo $total;
-if($total != 0)
-{
-    ?>
-    <div class="header">
-            <div class="navbar">
-                <a href="dashboard.html">Home</a>
-                <a href="Editplans.php">Return</a>
-            </div>
-        </div>
-        <h2 align ="center">Premium Pack Plans </h2>
-    <table border="2" cellspacing="7" width="100%">
-        <tr>
-        <th width="5%">id</th>
-        <th width="15%">Plan Name</th> 
-        <th width="10%">Plan code</th>    
-        <th width="5%">Price</th>
-        <th width="10%">Quality</th>
-        <th width="10%">Operation</th>
-        </tr>
-    <?php
-    while($result = mysqli_fetch_assoc($data))
-    {
-        echo "<tr>
-                <td>".$result['id']."</td>
-                <td>".$result['mname']."</td>
-                <td>".$result['aname']."</td>
-                <td>".$result['yname']."</td>
-                <td>".$result['uname']."</td>
-                <td><a href='update_plan2.php?id=$result[id]'><input type='Submit' class='Edit' value='Edit'></a>
-            </tr>";
-    }
-}    
-else
-{ 
-    echo "No records found";
+session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
 }
+include("connection.php");
+
+$data  = mysqli_query($conn, "SELECT * FROM form5 WHERE uname='HD Pack' ORDER BY id");
+$total = mysqli_num_rows($data);
 ?>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Pack Channels</title>
+    <style>
+        body { background: #1a1a2e; color: white; font-family: Arial, sans-serif; margin: 0; }
+        .header { background: rgba(0,0,0,0.6); padding: 10px 20px; display: flex; justify-content: space-between; }
+        .header a { color: white; text-decoration: none; border: 1px solid #fff; padding: 7px 14px; border-radius: 5px; margin-left: 8px; font-size: 14px; }
+        .header a:hover { background: #007bff; }
+        h2 { text-align: center; color: white; }
+        table { width: 80%; margin: 20px auto; background: rgba(255,255,255,0.92); border-collapse: collapse; border-radius: 8px; }
+        th, td { padding: 12px; text-align: center; border: 1px solid #ddd; }
+        th { background: #4CAF50; color: white; }
+        td { background: #f9f9f9; color: black; }
+        .btn-edit { background: #007bff; color: white; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>Premium Pack (HD) Channels</span>
+        <div>
+            <a href="plans2.php">+ Add Channel</a>
+            <a href="Editplans.php">Return</a>
+        </div>
+    </div>
+    <h2>Premium Pack Channels (<?php echo $total; ?>)</h2>
+    <?php if ($total > 0): ?>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Channel Name</th>
+            <th>Code</th>
+            <th>Price (Rs.)</th>
+            <th>Quality</th>
+            <th>Actions</th>
+        </tr>
+        <?php while ($row = mysqli_fetch_assoc($data)): ?>
+        <tr>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo htmlspecialchars($row['mname']); ?></td>
+            <td><?php echo htmlspecialchars($row['aname']); ?></td>
+            <td><?php echo $row['yname']; ?></td>
+            <td><?php echo htmlspecialchars($row['uname']); ?></td>
+            <td><a href="update_plan2.php?id=<?php echo $row['id']; ?>" class="btn-edit">Edit</a></td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+    <?php else: ?>
+        <p style="text-align:center;">No channels found.</p>
+    <?php endif; ?>
+</body>
+</html>

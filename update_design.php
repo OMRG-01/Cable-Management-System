@@ -1,163 +1,113 @@
-<?php 
-include ("connection.php"); 
+<?php
 session_start();
+if (!isset($_SESSION['admin_name'])) {
+    header('Location: operator.php');
+    exit;
+}
+include("connection.php");
 
-$Id = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    header('Location: updatecustomer.php');
+    exit;
+}
+$Id = (int)$_GET['id'];
+$error = '';
 
-$userprofile = $_SESSION['user_name'];
+if (isset($_POST['register'])) {
+    $cname   = trim($_POST['cname']);
+    $sname   = trim($_POST['sname']);
+    $pname   = trim($_POST['pname']);
+    $selname = trim($_POST['selname']);
+    $sename  = trim($_POST['sename']);
+    $hname   = trim($_POST['hname']);
+    $rname   = trim($_POST['rname']);
 
-$query = "SELECT * FROM form1 where id = '$Id'";
-$data = mysqli_query($conn, $query);
+    $stmt = mysqli_prepare($conn, "UPDATE form1 SET cname=?, sname=?, pname=?, selname=?, sename=?, hname=?, rname=? WHERE id=?");
+    mysqli_stmt_bind_param($stmt, "sssssssi", $cname, $sname, $pname, $selname, $sename, $hname, $rname, $Id);
+    if (mysqli_stmt_execute($stmt)) {
+        header('Location: updatecustomer.php');
+        exit;
+    } else {
+        $error = 'Update failed. Please try again.';
+    }
+}
 
-$total = mysqli_num_rows($data);
-$result = mysqli_fetch_assoc($data);
+$stmt = mysqli_prepare($conn, "SELECT * FROM form1 WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $Id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
+if (!$result) {
+    header('Location: updatecustomer.php');
+    exit;
+}
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit Customer</title>
     <link rel="stylesheet" type="text/css" href="style4.css">
 </head>
-
 <body>
-<div class="header">
-            <div class="navbar">
-                <ul>
-                    <li><a href="updatecustomer.php">Return</a></li>
-                </ul>
-            </div>
+    <div class="header">
+        <div class="navbar">
+            <ul><li><a href="updatecustomer.php">Return</a></li></ul>
         </div>
+    </div>
     <div class="container">
         <form action="#" method="POST">
-            <div class="title">
-                <h1>UPDATE DETAILS </h1>
-            </div>
+            <div class="title"><h1>EDIT CUSTOMER</h1></div>
+            <?php if ($error): ?>
+                <p style="color:red;text-align:center;"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
             <div class="form">
                 <div class="input_field">
-                    <label>Email Id</label>
-                    <input type="text" value="<?php echo $result['cname'];?>" class="input" name="cname" pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
-                    title="Please enter a valid Gmail address" required>
+                    <label>Email ID</label>
+                    <input type="text" class="input" value="<?php echo htmlspecialchars($result['cname']); ?>" name="cname"
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
                 </div>
                 <div class="input_field">
-                    <label>STB-Id</label>
-                    <input type="text" value="<?php echo $result['sname'];?>" class="input" name="sname" pattern="\d{6}" required>
+                    <label>STB-ID</label>
+                    <input type="text" class="input" value="<?php echo htmlspecialchars($result['sname']); ?>" name="sname" pattern="\d{6}" required>
                 </div>
                 <div class="input_field">
                     <label>Phone Number</label>
-                    <input type="number" value="<?php echo $result['pname'];?>" class="input" name="pname" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength="12" placeholder="xxx-xxx-xxxx">
+                    <input type="text" class="input" value="<?php echo htmlspecialchars($result['pname']); ?>" name="pname" maxlength="12">
                 </div>
-                <div>
-                    <div class="input_field">
+                <div class="input_field">
                     <label>Area</label>
-                    <select class="selectbox" value="<?php echo $result['selname'];?>" name="selname" required>
-                        <option >Select</option>
-                        <option value="Panchpakadi"
+                    <select class="selectbox" name="selname" required>
                         <?php
-                                if($result['selname'] == 'Panchpakadi')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Panchpakadi</option>
-                        <option value="Khopat"
-                        <?php
-                                if($result['selname'] == 'Khopat')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Khopat</option>
-                        <option value="Charai"
-                        <?php
-                                if($result['selname'] == 'Charai')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Charai</option>
-                        <option value="Chandanwadi"
-                        <?php
-                                if($result['selname'] == 'Chandanwadi')
-                                {
-                                    echo "selected";
-                                }
-                            ?>    
-                        >Chandanwadi</option>
+                        $areas = ['ShivajiNagar','VijayNagar','Saradwadi','GaneshPeth','Panchpakadi','Khopat','Charai','Chandanwadi'];
+                        foreach ($areas as $a) {
+                            $sel = ($result['selname'] == $a) ? 'selected' : '';
+                            echo "<option value=\"$a\" $sel>$a</option>";
+                        }
+                        ?>
                     </select>
-                    </div>
+                </div>
                 <div class="input_field">
                     <label>Subscription</label>
-                    <select class="selectbox" value="<?php echo $result['sename'];?>" name="sename" required>
-                        <option>Select</option>
-                        <option value="Premium Pack"
-                            <?php
-                                if($result['sename'] == 'Premium Pack')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Premium Pack</option>
-                        <option  value="Gold Pack"
-                        <?php
-                                if($result['sename'] == 'Gold Pack')
-                                {
-                                    echo "selected";
-                                }
-                            ?>
-                        >Gold Pack</option>Prices according to the selected Subscription
-                        </select>
+                    <select class="selectbox" name="sename" required>
+                        <option value="Premium Pack" <?php echo $result['sename']=='Premium Pack'?'selected':''; ?>>Premium Pack (HD) - Rs.650</option>
+                        <option value="Gold Pack" <?php echo $result['sename']=='Gold Pack'?'selected':''; ?>>Gold Pack (SD) - Rs.450</option>
+                    </select>
                 </div>
                 <div class="input_field">
-                    <label>Set Username</label>
-                    <input type="text" class="input" value="<?php echo $result['hname'];?>" name="hname" placeholder="eg.mayur@123" required>
+                    <label>Username</label>
+                    <input type="text" class="input" value="<?php echo htmlspecialchars($result['hname']); ?>" name="hname" required>
                 </div>
                 <div class="input_field">
                     <label>Password</label>
-                    <input type="password" class="input" value="<?php echo $result['cname'];?>" name="rname" placeholder="set Password"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
-                    title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character" required>
-                </div> 
-                <div class="input_field">
-                    <button type="submit" class="btn" value="Update" name="register">Update Details</button>
+                    <input type="password" class="input" name="rname" placeholder="Enter new password" required>
                 </div>
+                <div class="input_field">
+                    <button type="submit" class="btn" name="register">Update Customer</button>
+                </div>
+            </div>
         </form>
-        </div>
-        </div>
+    </div>
 </body>
 </html>
-
-<?php 
-    if(isset($_POST['register']))
-    {
-        $cname =$_POST['cname'];
-        $sname =$_POST['sname'];
-        $pname =$_POST['pname'];
-        $selname =$_POST['selname'];
-        $kname =$_POST['kname'];
-        $sename =$_POST['sename'];
-        $hname =$_POST['hname'];
-        $rname =$_POST['rname'];                                                                                                                                                                                                                                                                                                                                                                                                                           
-        
-        $query= "UPDATE form1 set cname='$cname',sname='$sname',pname='$pname',selname='$selname',kname='$kname',sename='$sename',hname='$hname',rname='$rname' WHERE id ='$Id'";         
-        $data = mysqli_query($conn,$query);
-        
-        if($data)
-        {
-            echo "<script>alert('Record Updated')</script>";
-            
-            ?>
-            <meta http-equiv="refresh" content="1; url='http://localhost/CMD/updatecustomer.php'" />
-
-            <?php
-        }
-        else
-        {
-            echo "Failed to Update";
-        }
-    }
-    
-?>
